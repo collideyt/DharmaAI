@@ -11,6 +11,19 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env*.local
+
+# Next.js build output
+.next
+out
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Coverage
+coverage
 
 # Editor directories and files
 .vscode/*
