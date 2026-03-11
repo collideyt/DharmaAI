@@ -11,9 +11,9 @@ export default function MascotSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="glass-card rounded-2xl p-5"
+          className="glass-card rounded-2xl p-2"
         >
-          <div className="flex aspect-square items-center justify-center rounded-xl border border-dashed border-indigo-300/40 bg-slate-900/50 text-slate-300">
+          <div className="flex aspect-square items-center justify-center rounded-xl border-indigo-300/40 bg-slate-900/50 text-slate-300">
             AI Monk Placeholder
           </div>
         </motion.div>
