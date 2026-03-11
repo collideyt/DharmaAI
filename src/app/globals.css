@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #6366f1;
+  --color-accent: #22d3ee;
+  --color-bg: #050816;
+  --color-surface: #0d1326;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: #e5e7eb;
+  background: radial-gradient(circle at 10% 10%, #111938 0%, var(--color-bg) 48%, #02030a 100%);
+}
+
+@layer components {
+  .section-shell {
+    margin-inline: auto;
+    width: min(1200px, 92%);
+  }
+
+  .glass-card {
+    background: linear-gradient(140deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 5%));
+    backdrop-filter: blur(14px);
+    border: 1px solid rgb(255 255 255 / 15%);
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, var(--color-accent), #9ea8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
