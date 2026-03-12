@@ -26,7 +26,7 @@ export default function Page() {
 
   return (
     <section className="section-shell py-16">
-      <h1 className="text-4xl font-bold text-white">AI Resource Hub</h1>
+      <h1 className="text-4xl font-bold text-white">AI Resources</h1>
       <p className="mt-3 text-slate-300">Tools, prompts, and automation guides for teams entering the AI-first economy.</p>
       <div className="glass-card mt-8 flex items-center gap-3 rounded-xl px-4 py-3">
         <Search size={18} className="text-slate-400" />
