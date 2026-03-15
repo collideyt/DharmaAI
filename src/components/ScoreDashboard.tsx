@@ -1,61 +1,80 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
-export type CategoryScore = {
-  name: 'Lead Automation' | 'Customer Support' | 'Marketing AI' | 'Operations'
-  score: number
+export type DashboardCategory = {
+  label: string
+  value: number
 }
 
 type ScoreDashboardProps = {
   score: number
-  categories: CategoryScore[]
+  categories: DashboardCategory[]
 }
+
+const recommendations = ['AI Readiness Audit', 'AI Lead Automation', 'AI Chatbot Setup']
 
 export default function ScoreDashboard({ score, categories }: ScoreDashboardProps) {
   return (
-    <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-cyan-900/10 backdrop-blur-md">
-      <h3 className="text-2xl font-bold text-white">AI Readiness Report</h3>
-
-      <div className="mt-5 rounded-2xl border border-cyan-300/20 bg-slate-950/50 p-5 text-center">
-        <p className="text-sm uppercase tracking-[0.2em] text-cyan-300">Overall Score</p>
-        <p className="mt-2 text-4xl font-extrabold text-white md:text-5xl">{score}% AI Ready</p>
-      </div>
-
-      <div className="mt-6 space-y-4">
-        {categories.map((category, index) => (
-          <div key={category.name}>
-            <div className="mb-2 flex items-center justify-between text-sm text-slate-200">
-              <span>{category.name}</span>
-              <span>{category.score}%</span>
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="premium-card rounded-[30px] p-8"
+    >
+      <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">AI Readiness Report</p>
+          <h2 className="mt-3 text-3xl font-bold text-white">Overall Score</h2>
+          <div className="mt-6 rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+            <div className="flex items-end gap-3">
+              <span className="text-5xl font-extrabold text-white md:text-6xl">{score}%</span>
+              <span className="pb-2 text-lg font-medium text-cyan-200">AI Ready</span>
             </div>
-            <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
-              <motion.div
-                className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400"
-                initial={{ width: 0 }}
-                animate={{ width: `${category.score}%` }}
-                transition={{ duration: 0.6, delay: index * 0.06 }}
-              />
+            <p className="mt-3 max-w-xl text-slate-300">
+              You have a strong foundation to start deploying AI systems. The next opportunity is structured automation across leads, support, and operations.
+            </p>
+          </div>
+          <div className="mt-8 space-y-4">
+            {categories.map((category, index) => (
+              <div key={category.label}>
+                <div className="mb-2 flex items-center justify-between text-sm">
+                  <span className="text-slate-200">{category.label}</span>
+                  <span className="font-semibold text-cyan-200">{category.value}%</span>
+                </div>
+                <div className="h-3 overflow-hidden rounded-full bg-white/8">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${category.value}%` }}
+                    transition={{ duration: 0.75, delay: 0.1 * index }}
+                    className="h-full rounded-full bg-[linear-gradient(90deg,#7c3aed,#06b6d4,#22c55e)] shadow-[0_0_18px_rgba(34,211,238,0.32)]"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="space-y-5">
+          <div className="rounded-[28px] border border-cyan-300/15 bg-[linear-gradient(180deg,rgba(8,12,26,0.86),rgba(10,17,34,0.92))] p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Recommended DharmaAI Solutions</p>
+            <div className="mt-5 space-y-3">
+              {recommendations.map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-slate-100">
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+          <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
+            <p className="text-sm text-slate-300">
+              DharmaAI can turn this report into a practical roadmap covering automation, lead systems, customer support, and AI operations.
+            </p>
+            <Link href="/contact" className="premium-button mt-6 inline-flex">
+              Book AI Strategy Call
+            </Link>
+          </div>
+        </div>
       </div>
-
-      <div className="mt-6 rounded-xl border border-white/10 bg-slate-900/40 p-4">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-cyan-300">Recommended DharmaAI Solutions</p>
-        <ul className="mt-3 space-y-2 text-sm text-slate-200">
-          <li>AI Readiness Audit</li>
-          <li>AI Lead Automation</li>
-          <li>AI Chatbot Setup</li>
-        </ul>
-      </div>
-
-      <button
-        type="button"
-        className="mt-6 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-950/30 transition hover:scale-[1.02]"
-      >
-        Book AI Strategy Call
-      </button>
-    </div>
+    </motion.div>
   )
 }

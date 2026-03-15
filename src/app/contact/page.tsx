@@ -10,7 +10,7 @@ export default function Page() {
         <input className="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white outline-none md:col-span-2" placeholder="Company" />
         <textarea className="min-h-36 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white outline-none md:col-span-2" placeholder="Message" />
         <div className="md:col-span-2">
-          <button type="button" className="inline-flex rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950">
+          <button type="button" className="premium-button inline-flex">
             Send Inquiry
           </button>
         </div>

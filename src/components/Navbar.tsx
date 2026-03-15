@@ -4,18 +4,50 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { navLinks } from './data'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
 
   const linkStyle = (href: string) =>
     `text-sm transition ${pathname === href ? 'text-cyan-300' : 'text-slate-200 hover:text-white'}`
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < 80) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(true)
+      }
+
+      lastScrollY = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setOpen(false)
+    setIsVisible(true)
+  }, [pathname])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md transition-transform duration-300 ${
+        isVisible || open ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <nav className="section-shell flex h-[72px] items-center justify-between py-4">
         <Link href="/" className="text-xl font-extrabold text-white">
           Dharma<span className="text-gradient">AI</span>
@@ -26,10 +58,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/assessment"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-          >
+          <Link href="/assessment" className="premium-button inline-flex">
             Get AI Audit
           </Link>
         </div>
@@ -39,7 +68,7 @@ export default function Navbar() {
       </nav>
       <Dialog open={open} onClose={setOpen} className="md:hidden">
         <div className="fixed inset-0 z-50 bg-black/60">
-          <DialogPanel className="ml-auto h-full w-72 border-l border-white/10 bg-slate-950 p-6">
+          <DialogPanel className="ml-auto h-full w-72 border-l border-white/10 bg-slate-950/70 p-6 backdrop-blur-xl">
             <div className="mb-8 flex items-center justify-between">
               <p className="font-semibold text-white">DharmaAI</p>
               <button onClick={() => setOpen(false)} className="text-white" aria-label="Close menu">
@@ -52,11 +81,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/assessment"
-                onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950"
-              >
+              <Link href="/assessment" onClick={() => setOpen(false)} className="premium-button mt-2 inline-flex">
                 Get AI Audit
               </Link>
             </div>
