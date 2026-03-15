@@ -108,7 +108,7 @@ export default function Chatbot() {
 
       <button
         onClick={() => setOpen((v) => !v)}
-        className="premium-button inline-flex w-[190px] justify-center gap-2 text-center"
+        className="premium-button inline-flex w-[190px] justify-center gap-2 text-center whitespace-nowrap"
       >
         <Sparkles size={16} />
         {open ? 'Close Chat' : 'Ask DharmaAI'}
