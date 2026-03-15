@@ -38,13 +38,13 @@ export default function AIReadinessQuiz() {
       <p className="mt-6 text-lg font-semibold text-white">Your AI Readiness Score: {score}%</p>
       <div className="mt-4 h-3 w-full overflow-hidden rounded-full bg-white/10">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400"
+          className="h-full rounded-full bg-gradient-to-r from-purple-500 via-cyan-400 to-emerald-400"
           initial={{ width: 0 }}
           animate={{ width: `${score}%` }}
           transition={{ duration: 0.6 }}
         />
       </div>
-      <button className="mt-6 inline-flex rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950">
+      <button className="premium-button mt-6 inline-flex">
         Get a Full AI Strategy Audit
       </button>
     </div>

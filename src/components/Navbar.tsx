@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl transition-transform duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md transition-transform duration-300 ${
         isVisible || open ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
@@ -58,10 +58,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/assessment"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition hover:brightness-110"
-          >
+          <Link href="/assessment" className="premium-button inline-flex">
             Get AI Audit
           </Link>
         </div>
@@ -71,7 +68,7 @@ export default function Navbar() {
       </nav>
       <Dialog open={open} onClose={setOpen} className="md:hidden">
         <div className="fixed inset-0 z-50 bg-black/60">
-          <DialogPanel className="ml-auto h-full w-72 border-l border-white/10 bg-slate-950 p-6">
+          <DialogPanel className="ml-auto h-full w-72 border-l border-white/10 bg-slate-950/70 p-6 backdrop-blur-xl">
             <div className="mb-8 flex items-center justify-between">
               <p className="font-semibold text-white">DharmaAI</p>
               <button onClick={() => setOpen(false)} className="text-white" aria-label="Close menu">
@@ -84,11 +81,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/assessment"
-                onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950"
-              >
+              <Link href="/assessment" onClick={() => setOpen(false)} className="premium-button mt-2 inline-flex">
                 Get AI Audit
               </Link>
             </div>

@@ -5,9 +5,10 @@ import { LoaderCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const messages = [
-  'Scanning workflows...',
-  'Evaluating automation opportunities...',
-  'Calculating AI readiness score...',
+  'Scanning business workflows...',
+  'Mapping automation opportunities...',
+  'Training AI insight engine...',
+  'Generating readiness score...',
 ]
 
 export default function AIAnalyzing() {

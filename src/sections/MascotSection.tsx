@@ -5,7 +5,13 @@ import { motion } from 'framer-motion'
 export default function MascotSection() {
   return (
     <section className="py-16">
-      <div className="section-shell grid items-center gap-8 md:grid-cols-2">
+      <motion.div
+        className="section-shell grid items-center gap-8 md:grid-cols-2"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +31,7 @@ export default function MascotSection() {
             disciplined strategy and practical execution for small businesses.
           </p>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

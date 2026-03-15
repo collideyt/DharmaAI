@@ -1,12 +1,19 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { caseStudies } from '../components/data'
 import CaseStudyCard from '../components/CaseStudyCard'
 
 export default function CaseStudiesSection() {
   return (
     <section className="py-16">
-      <div className="section-shell">
+      <motion.div
+        className="section-shell"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Proof</p>
         <h2 className="text-3xl font-bold text-white md:text-4xl">Case studies from AI-first implementation</h2>
         <p className="mt-3 max-w-2xl text-slate-300">
@@ -17,7 +24,7 @@ export default function CaseStudiesSection() {
             <CaseStudyCard key={study.title} study={study} />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

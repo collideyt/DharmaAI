@@ -1,12 +1,19 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { services } from '../components/data'
 import ServiceCard from '../components/ServiceCard'
 
 export default function ServicesSection() {
   return (
     <section className="py-16">
-      <div className="section-shell">
+      <motion.div
+        className="section-shell"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
         <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Services</p>
         <h2 className="text-3xl font-bold text-white md:text-4xl">Execution-focused AI services for growth</h2>
         <p className="mt-3 max-w-2xl text-slate-300">
@@ -17,7 +24,7 @@ export default function ServicesSection() {
             <ServiceCard key={service.title} service={service} />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
