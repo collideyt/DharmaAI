@@ -4,18 +4,50 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { navLinks } from './data'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
 
   const linkStyle = (href: string) =>
     `text-sm transition ${pathname === href ? 'text-cyan-300' : 'text-slate-200 hover:text-white'}`
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY < 80) {
+        setIsVisible(true)
+      } else if (currentScrollY > lastScrollY) {
+        setIsVisible(false)
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(true)
+      }
+
+      lastScrollY = currentScrollY
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setOpen(false)
+    setIsVisible(true)
+  }, [pathname])
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl transition-transform duration-300 ${
+        isVisible || open ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <nav className="section-shell flex h-[72px] items-center justify-between py-4">
         <Link href="/" className="text-xl font-extrabold text-white">
           Dharma<span className="text-gradient">AI</span>

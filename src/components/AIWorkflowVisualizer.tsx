@@ -1,74 +1,67 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import type { LucideIcon } from 'lucide-react'
-import { Bot, ChartSpline, CircleCheckBig, MessageSquare, Workflow } from 'lucide-react'
+import { ArrowRight, MessageSquareMore, Bot, Filter, Workflow, BarChart3 } from 'lucide-react'
 
-type WorkflowStep = {
-  title: string
-  description: string
-  icon: LucideIcon
-}
-
-const workflowSteps: WorkflowStep[] = [
-  {
-    title: 'Customer Inquiry',
-    description: 'Website visitor or incoming lead',
-    icon: MessageSquare,
-  },
-  {
-    title: 'AI Chatbot Response',
-    description: 'Responds instantly using AI',
-    icon: Bot,
-  },
-  {
-    title: 'Lead Qualification',
-    description: 'AI filters high quality leads',
-    icon: CircleCheckBig,
-  },
-  {
-    title: 'CRM Automation',
-    description: 'Lead pushed to CRM',
-    icon: Workflow,
-  },
-  {
-    title: 'Sales Dashboard',
-    description: 'Insights and analytics',
-    icon: ChartSpline,
-  },
-]
+const steps = [
+  { title: 'Customer Inquiry', description: 'A visitor reaches out through your website, ads, or WhatsApp.', icon: MessageSquareMore },
+  { title: 'AI Chatbot Response', description: 'An AI assistant responds instantly and captures the right context.', icon: Bot },
+  { title: 'Lead Qualification', description: 'The conversation is scored based on intent, fit, and urgency.', icon: Filter },
+  { title: 'CRM Automation', description: 'Qualified leads are routed into your CRM and follow-up sequences.', icon: Workflow },
+  { title: 'Sales Dashboard', description: 'Leadership sees performance, response times, and pipeline lift.', icon: BarChart3 },
+] as const
 
 export default function AIWorkflowVisualizer() {
   return (
-    <div className="flex flex-col gap-4 lg:flex-row lg:items-stretch lg:gap-3">
-      {workflowSteps.map((step, index) => {
-        const Icon = step.icon
+    <section className="relative py-20">
+      <motion.div
+        className="section-shell"
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+      >
+        <div className="mb-10 max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">AI Workflow Visualizer</p>
+          <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">How DharmaAI turns conversations into qualified pipeline</h2>
+          <p className="mt-4 text-slate-300">
+            We connect customer touchpoints, automation layers, and reporting so the business runs faster without adding manual overhead.
+          </p>
+        </div>
+        <div className="flex items-stretch justify-between gap-4">
+          {steps.map((step, index) => {
+            const Icon = step.icon
 
-        return (
-          <div key={step.title} className="flex flex-col items-center lg:flex-row lg:flex-1">
-            <motion.div
-              className="w-full rounded-2xl bg-gradient-to-br from-cyan-400/60 via-sky-500/40 to-indigo-500/60 p-[1px]"
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              whileHover={{ scale: 1.02 }}
-            >
-              <div className="h-full rounded-2xl border border-white/10 bg-slate-950/70 p-5 shadow-lg shadow-cyan-900/20 backdrop-blur-sm">
-                <div className="mb-3 inline-flex rounded-xl bg-cyan-400/15 p-2 text-cyan-200">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-semibold text-white">{step.title}</h3>
-                <p className="mt-2 text-sm text-slate-300">{step.description}</p>
+            return (
+              <div key={step.title} className="flex flex-col xl:flex-row xl:items-center">
+                <motion.article
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="flex-1 min-w-[180px] max-w-[220px] min-h-[220px] flex flex-col justify-between bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 transition hover:-translate-y-1"
+                >
+                  <div className="flex flex-col h-full">
+                    <div className="mb-4 flex items-center justify-center">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
+                        <Icon size={20} />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2 text-white">{step.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">{step.description}</p>
+                  </div>
+                </motion.article>
+                {index < steps.length - 1 ? (
+                  <div className="flex justify-center py-3 xl:px-3 xl:py-0">
+                    <ArrowRight className="hidden text-cyan-300/70 xl:block" size={20} />
+                    <ArrowRight className="rotate-90 text-cyan-300/70 xl:hidden" size={20} />
+                  </div>
+                ) : null}
               </div>
-            </motion.div>
-
-            {index < workflowSteps.length - 1 ? (
-              <div className="my-2 h-6 w-px bg-gradient-to-b from-cyan-400/80 to-indigo-500/80 lg:mx-2 lg:my-0 lg:h-px lg:w-8 lg:bg-gradient-to-r" />
-            ) : null}
-          </div>
-        )
-      })}
-    </div>
+            )
+          })}
+        </div>
+      </motion.div>
+    </section>
   )
 }

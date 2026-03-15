@@ -1,152 +1,158 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { CheckCircle2, Circle } from 'lucide-react'
-import ScoreDashboard, { type CategoryScore } from './ScoreDashboard'
+import AIAnalyzing from './AIAnalyzing'
+import AIToolRecommender from './AIToolRecommender'
+import ScoreDashboard, { type DashboardCategory } from './ScoreDashboard'
 
-type QuizQuestion = {
+type Question = {
   id: string
   label: string
-  category: CategoryScore['name']
+  category: DashboardCategory['label']
 }
 
-const questions: QuizQuestion[] = [
-  {
-    id: 'lead_capture',
-    label: 'Do you capture leads automatically?',
-    category: 'Lead Automation',
-  },
-  {
-    id: 'crm',
-    label: 'Do you use a CRM system?',
-    category: 'Operations',
-  },
-  {
-    id: 'ai_tools',
-    label: 'Do you currently use AI tools?',
-    category: 'Marketing AI',
-  },
-  {
-    id: 'support',
-    label: 'Do you automate customer support?',
-    category: 'Customer Support',
-  },
-  {
-    id: 'data_analysis',
-    label: 'Do you analyze business data?',
-    category: 'Operations',
-  },
+const questions: Question[] = [
+  { id: 'leads', label: 'Do you capture leads automatically?', category: 'Lead Automation' },
+  { id: 'crm', label: 'Do you use CRM software?', category: 'Operations' },
+  { id: 'ai-tools', label: 'Do you currently use AI tools?', category: 'Marketing AI' },
+  { id: 'support', label: 'Do you automate customer support?', category: 'Customer Support' },
+  { id: 'data', label: 'Do you analyze business data?', category: 'Operations' },
 ]
 
-type Answers = Record<string, boolean | null>
+type Answers = Record<string, boolean>
 
-const initialAnswers = questions.reduce<Answers>((acc, question) => {
-  acc[question.id] = null
-  return acc
+const initialAnswers = questions.reduce<Answers>((accumulator, question) => {
+  accumulator[question.id] = false
+  return accumulator
 }, {})
+
+type QuizState = 'quiz' | 'analyzing' | 'report'
 
 export default function AIQuiz() {
   const [answers, setAnswers] = useState<Answers>(initialAnswers)
-  const [submitted, setSubmitted] = useState(false)
-
-  const answeredCount = useMemo(
-    () => Object.values(answers).filter((value) => value !== null).length,
-    [answers],
-  )
+  const [quizState, setQuizState] = useState<QuizState>('quiz')
+  const timerRef = useRef<number | null>(null)
 
   const score = useMemo(() => {
-    const yesCount = Object.values(answers).filter(Boolean).length
-    return Math.round((yesCount / questions.length) * 100)
+    const positiveAnswers = Object.values(answers).filter(Boolean).length
+    return Math.round((positiveAnswers / questions.length) * 100)
   }, [answers])
 
-  const categoryScores = useMemo<CategoryScore[]>(() => {
-    const categories: CategoryScore['name'][] = [
-      'Lead Automation',
-      'Customer Support',
-      'Marketing AI',
-      'Operations',
-    ]
+  const categories = useMemo<DashboardCategory[]>(() => {
+    const categoryMap = new Map<DashboardCategory['label'], boolean[]>()
 
-    return categories.map((category) => {
-      const categoryQuestions = questions.filter((question) => question.category === category)
-      const total = categoryQuestions.length
-      const yesAnswers = categoryQuestions.filter((question) => answers[question.id] === true).length
-      return {
-        name: category,
-        score: total ? Math.round((yesAnswers / total) * 100) : 0,
-      }
+    questions.forEach((question) => {
+      const values = categoryMap.get(question.category) ?? []
+      values.push(answers[question.id])
+      categoryMap.set(question.category, values)
+    })
+
+    return ['Lead Automation', 'Customer Support', 'Marketing AI', 'Operations'].map((label) => {
+      const values = categoryMap.get(label) ?? []
+      const value = values.length === 0 ? 0 : Math.round((values.filter(Boolean).length / values.length) * 100)
+
+      return { label, value }
     })
   }, [answers])
 
-  return (
-    <section className="py-16">
-      <div className="section-shell">
-        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">AI Readiness Quiz</p>
-        <h2 className="text-3xl font-bold text-white md:text-4xl">Measure how ready your business is for AI automation.</h2>
+  const answeredCount = Object.values(answers).filter(Boolean).length
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-xl shadow-cyan-900/10 backdrop-blur-md">
-          <div className="space-y-4">
+  const handleSubmit = () => {
+    setQuizState('analyzing')
+    timerRef.current = window.setTimeout(() => {
+      setQuizState('report')
+    }, 2000)
+  }
+
+  if (quizState === 'analyzing') {
+    return <AIAnalyzing />
+  }
+
+  if (quizState === 'report') {
+    return (
+      <div className="space-y-8">
+        <ScoreDashboard score={score} categories={categories} />
+        <AIToolRecommender />
+      </div>
+    )
+  }
+
+  return (
+    <div className="premium-card rounded-[30px] p-8">
+      <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">AI Readiness Quiz</p>
+          <h2 className="mt-3 text-3xl font-bold text-white">Discover how prepared your business is for AI</h2>
+          <p className="mt-3 max-w-2xl text-slate-300">
+            Answer a few quick questions and DharmaAI will generate a practical readiness report with the next systems to implement.
+          </p>
+          <div className="mt-8 space-y-4">
             {questions.map((question, index) => (
               <motion.div
                 key={question.id}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.35, delay: index * 0.05 }}
-                className="rounded-xl border border-white/10 bg-slate-900/40 p-4"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.25, delay: index * 0.05 }}
+                className="rounded-[24px] border border-white/10 bg-white/5 p-5 shadow-[0_18px_36px_rgba(2,6,23,0.2)]"
               >
-                <p className="text-sm text-slate-100 md:text-base">{question.label}</p>
-                <div className="mt-3 flex gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setAnswers((prev) => ({ ...prev, [question.id]: true }))}
-                    className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition ${
-                      answers[question.id] === true
-                        ? 'bg-cyan-400 text-slate-950'
-                        : 'bg-white/10 text-slate-200 hover:bg-white/20'
-                    }`}
-                  >
-                    {answers[question.id] === true ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-                    Yes
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAnswers((prev) => ({ ...prev, [question.id]: false }))}
-                    className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition ${
-                      answers[question.id] === false
-                        ? 'bg-indigo-300 text-slate-950'
-                        : 'bg-white/10 text-slate-200 hover:bg-white/20'
-                    }`}
-                  >
-                    {answers[question.id] === false ? <CheckCircle2 size={16} /> : <Circle size={16} />}
-                    No
-                  </button>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-base font-medium text-white">{question.label}</p>
+                    <p className="mt-1 text-sm text-slate-400">{question.category}</p>
+                  </div>
+                  <div className="inline-flex rounded-full border border-white/10 bg-slate-950/50 p-1">
+                    {[
+                      { label: 'No', value: false },
+                      { label: 'Yes', value: true },
+                    ].map((option) => (
+                      <button
+                        key={option.label}
+                        type="button"
+                        onClick={() => setAnswers((current) => ({ ...current, [question.id]: option.value }))}
+                        className={`rounded-full px-4 py-2 text-sm transition ${
+                          answers[question.id] === option.value
+                            ? 'bg-gradient-to-r from-purple-500 via-cyan-400 to-emerald-400 text-slate-950 shadow-[0_8px_18px_rgba(124,58,237,0.25)]'
+                            : 'text-slate-300 hover:text-white'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-6 flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setSubmitted(true)}
-              disabled={answeredCount !== questions.length}
-              className="rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-lg shadow-cyan-950/30 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              Generate AI Readiness Report
-            </button>
-            <p className="text-sm text-slate-300">{answeredCount}/{questions.length} answered</p>
-          </div>
-
-          {submitted ? (
-            <div className="mt-8">
-              <p className="text-lg font-semibold text-white">Your AI Readiness Score: {score}%</p>
-              <ScoreDashboard score={score} categories={categoryScores} />
+        </div>
+        <div className="flex flex-col gap-5">
+          <div className="rounded-[28px] border border-cyan-300/15 bg-[linear-gradient(180deg,rgba(12,18,35,0.95),rgba(8,12,24,0.92))] p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Live Estimate</p>
+            <div className="mt-4 flex items-end gap-3">
+              <span className="text-5xl font-extrabold text-white">{score}%</span>
+              <span className="pb-2 text-slate-300">AI readiness</span>
             </div>
-          ) : null}
+            <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/10">
+              <motion.div
+                animate={{ width: `${score}%` }}
+                transition={{ duration: 0.4 }}
+                className="h-full rounded-full bg-[linear-gradient(90deg,#7c3aed,#06b6d4,#22c55e)]"
+              />
+            </div>
+            <p className="mt-4 text-sm text-slate-300">
+              {answeredCount} of {questions.length} capabilities currently in place based on your answers.
+            </p>
+          </div>
+          <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
+            <p className="text-sm text-slate-300">
+              Submit your answers to generate a detailed readiness report and recommended DharmaAI solutions.
+            </p>
+            <button type="button" onClick={handleSubmit} className="premium-button mt-6 inline-flex">
+              Analyze My Business
+            </button>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
