@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={jakarta.className} suppressHydrationWarning>
         <div className="min-h-screen text-slate-100 flex flex-col">
           <Navbar />
-          <main className="pt-[72px] flex-1">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
           <Chatbot />
           <WhatsAppButton />

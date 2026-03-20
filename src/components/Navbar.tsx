@@ -44,11 +44,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md transition-transform duration-300 ${
+      className={`sticky inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-950/50 backdrop-blur-md transition-transform duration-300 ${
         isVisible || open ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
-      <nav className="section-shell flex h-[72px] items-center justify-between py-4">
+      <nav className="section-shell flex h-[var(--navbar-height)] items-center justify-between py-4">
         <Link href="/" className="text-xl font-extrabold text-white">
           Dharma<span className="text-gradient">AI</span>
         </Link>

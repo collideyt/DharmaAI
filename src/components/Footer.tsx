@@ -10,8 +10,8 @@ export default function Footer() {
           <p className="mt-3 text-xs text-slate-500">Automations, insights, and scalable systems for growth.</p>
         </div>
         <div>
-          <p className="font-semibold text-white">About DharmaAI</p>
-          <p className="mt-3 text-xs text-slate-500">Strategy, delivery, and AI enablement for modern teams.</p>
+          <p className="font-semibold text-white">Mission</p>
+          <p className="mt-3 text-xs text-slate-500">Helping SMEs adopt AI through practical systems and clear guidance.</p>
         </div>
         <div>
           <Link href="/services" className="font-semibold text-white">
@@ -20,10 +20,10 @@ export default function Footer() {
           <p className="mt-3 text-xs text-slate-500">Audits, workflows, and AI integrations tailored to you.</p>
         </div>
         <div>
-          <Link href="/resources" className="font-semibold text-white">
-            Resources
+          <Link href="/about-us" className="font-semibold text-white">
+            About Us
           </Link>
-          <p className="mt-3 text-xs text-slate-500">Guides, playbooks, and best practices for AI adoption.</p>
+          <p className="mt-3 text-xs text-slate-500">Meet Ashutosh and the vision behind Artha AI.</p>
         </div>
         <div className="space-y-2">
           <p className="font-semibold text-white">Contact</p>
