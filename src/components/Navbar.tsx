@@ -50,7 +50,7 @@ export default function Navbar() {
     >
       <nav className="section-shell flex h-[var(--navbar-height)] items-center justify-between py-4">
         <Link href="/" className="text-xl font-extrabold text-white">
-          Dharma<span className="text-gradient">AI</span>
+          Artha<span className="text-gradient">AI</span>
         </Link>
         <div className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
@@ -70,7 +70,7 @@ export default function Navbar() {
         <div className="fixed inset-0 z-50 bg-black/60">
           <DialogPanel className="ml-auto h-full w-72 border-l border-white/10 bg-slate-950/70 p-6 backdrop-blur-xl">
             <div className="mb-8 flex items-center justify-between">
-              <p className="font-semibold text-white">DharmaAI</p>
+              <p className="font-semibold text-white">ArthaAI</p>
               <button onClick={() => setOpen(false)} className="text-white" aria-label="Close menu">
                 <X size={20} />
               </button>

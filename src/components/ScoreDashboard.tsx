@@ -56,7 +56,7 @@ export default function ScoreDashboard({ score, categories }: ScoreDashboardProp
         </div>
         <div className="space-y-5">
           <div className="rounded-[28px] border border-cyan-300/15 bg-[linear-gradient(180deg,rgba(8,12,26,0.86),rgba(10,17,34,0.92))] p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Recommended DharmaAI Solutions</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Recommended ArthaAI Solutions</p>
             <div className="mt-5 space-y-3">
               {recommendations.map((item) => (
                 <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-slate-100">
@@ -67,7 +67,7 @@ export default function ScoreDashboard({ score, categories }: ScoreDashboardProp
           </div>
           <div className="rounded-[28px] border border-white/10 bg-white/5 p-6">
             <p className="text-sm text-slate-300">
-              DharmaAI can turn this report into a practical roadmap covering automation, lead systems, customer support, and AI operations.
+              ArthaAI can turn this report into a practical roadmap covering automation, lead systems, customer support, and AI operations.
             </p>
             <Link href="/contact" className="premium-button mt-6 inline-flex">
               Book AI Strategy Call

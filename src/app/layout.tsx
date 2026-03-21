@@ -10,8 +10,8 @@ import './globals.css'
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DharmaAI',
-  description: 'DharmaAI helps small businesses adopt AI in the AI-first economy.',
+  title: 'ArthaAI',
+  description: 'ArthaAI helps small businesses adopt AI in the AI-first economy.',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

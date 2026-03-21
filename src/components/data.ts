@@ -1,13 +1,21 @@
 import {
+  BadgeDollarSign,
   BrainCircuit,
   Building2,
+  Car,
   Globe,
   GraduationCap,
+  LineChart,
   MapPinned,
   Megaphone,
   MessageSquareText,
   MessagesSquare,
-  ShoppingCart,
+  Ruler,
+  Scale,
+  School,
+  ShieldCheck,
+  Stethoscope,
+  User,
   Workflow,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -22,13 +30,21 @@ export type Service = {
   highlights: string[]
   icon: LucideIcon
 }
-export type CaseStudy = { title: string; result: string; icon: LucideIcon }
+export type Industry = {
+  title: string
+  slug: string
+  category: 'Professionals' | 'SMEs'
+  summary: string
+  help: string
+  outcomes: string[]
+  icon: LucideIcon
+}
 
 export const navLinks: NavLink[] = [
   { label: 'Services', href: '/services' },
-  { label: 'Case Studies', href: '/case-studies' },
-  { label: 'About Us', href: '/about-us' },
+  { label: 'Industry', href: '/industry' },
   { label: 'Assessment', href: '/assessment' },
+  { label: 'About Us', href: '/about-us' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -96,20 +112,144 @@ export function getServiceBySlug(slug: string) {
   return services.find((service) => service.slug === slug)
 }
 
-export const caseStudies: CaseStudy[] = [
+export const industries: Industry[] = [
   {
-    title: 'Real Estate Agency',
-    result: 'AI chatbot increased leads by 3x.',
+    title: 'Chartered Accountant',
+    slug: 'chartered-accountant',
+    category: 'Professionals',
+    summary: 'Automate client onboarding, document checks, and compliance reminders.',
+    help: 'AI assistants can triage queries, collect documents, and surface filing deadlines for every client.',
+    outcomes: ['Client intake forms auto-filled', 'Document checklist automation', 'Deadline reminder workflows'],
+    icon: BadgeDollarSign,
+  },
+  {
+    title: 'Lawyers',
+    slug: 'lawyers',
+    category: 'Professionals',
+    summary: 'Capture leads, organize case intake, and respond faster to routine questions.',
+    help: 'AI can summarize intake notes, route matters to the right practice area, and keep clients updated.',
+    outcomes: ['Intake forms and conflict checks', 'Case summary drafts', 'Faster client update cycles'],
+    icon: Scale,
+  },
+  {
+    title: 'Architects',
+    slug: 'architects',
+    category: 'Professionals',
+    summary: 'Streamline project inquiries, briefs, and design feedback loops.',
+    help: 'AI can structure requirements, consolidate feedback, and keep stakeholders aligned.',
+    outcomes: ['Brief capture templates', 'Design feedback summaries', 'Status update automation'],
+    icon: Ruler,
+  },
+  {
+    title: 'Real Estate Consultants',
+    slug: 'real-estate-consultants',
+    category: 'Professionals',
+    summary: 'Qualify property leads and schedule site visits instantly.',
+    help: 'AI can match leads to listings, answer availability questions, and trigger follow-ups.',
+    outcomes: ['Lead qualification chat', 'Listing match suggestions', 'Visit scheduling workflows'],
     icon: Building2,
   },
   {
-    title: 'Online Coaching Business',
-    result: 'AI onboarding assistant reduced support time by 60%.',
+    title: 'Insurance Agents/Consultants',
+    slug: 'insurance-agents-consultants',
+    category: 'Professionals',
+    summary: 'Speed up policy inquiries, renewals, and documentation.',
+    help: 'AI can answer coverage questions, gather paperwork, and nudge renewals ahead of expiry.',
+    outcomes: ['Quote request intake', 'Renewal reminder sequences', 'Document collection support'],
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Portfolio Managers',
+    slug: 'portfolio-managers',
+    category: 'Professionals',
+    summary: 'Keep investor updates timely and onboarding consistent.',
+    help: 'AI can draft periodic updates, track client questions, and surface portfolio insights.',
+    outcomes: ['Investor update drafts', 'Onboarding checklists', 'FAQ response automation'],
+    icon: LineChart,
+  },
+  {
+    title: 'Solopreneurs',
+    slug: 'solopreneurs',
+    category: 'Professionals',
+    summary: 'Automate lead capture and follow-up while you stay focused.',
+    help: 'AI can act as a front-desk assistant and keep your pipeline organized.',
+    outcomes: ['Lead capture forms', 'Follow-up sequences', 'Scheduling assistance'],
+    icon: User,
+  },
+  {
+    title: 'Chartered Accountants & Financial Advisors',
+    slug: 'chartered-accountants-financial-advisors',
+    category: 'SMEs',
+    summary: 'Standardize onboarding and recurring advisory touchpoints.',
+    help: 'AI can collect client documents, prompt reviews, and keep compliance timelines visible.',
+    outcomes: ['Client onboarding kits', 'Recurring review reminders', 'Document tracking dashboards'],
+    icon: BadgeDollarSign,
+  },
+  {
+    title: 'Legal Firms',
+    slug: 'legal-firms',
+    category: 'SMEs',
+    summary: 'Route new matters quickly and reduce admin overhead.',
+    help: 'AI can summarize cases, triage priorities, and keep matter timelines on track.',
+    outcomes: ['Matter intake triage', 'Case summary briefs', 'Timeline tracking alerts'],
+    icon: Scale,
+  },
+  {
+    title: 'Architecture Firms',
+    slug: 'architecture-firms',
+    category: 'SMEs',
+    summary: 'Coordinate multi-stakeholder design workflows efficiently.',
+    help: 'AI can consolidate feedback, track deliverables, and streamline approvals.',
+    outcomes: ['Requirement gathering forms', 'Feedback consolidation', 'Milestone reminders'],
+    icon: Ruler,
+  },
+  {
+    title: 'Real Estate Developers & Brokers',
+    slug: 'real-estate-developers-brokers',
+    category: 'SMEs',
+    summary: 'Manage inquiries, broker coordination, and site visit logistics.',
+    help: 'AI can handle pre-qualification, schedule visits, and keep stakeholders updated.',
+    outcomes: ['Inquiry qualification', 'Broker update digests', 'Site visit scheduling'],
+    icon: Building2,
+  },
+  {
+    title: 'Education & Coaching Institutes',
+    slug: 'education-coaching-institutes',
+    category: 'SMEs',
+    summary: 'Convert inquiries to enrollments with faster responses.',
+    help: 'AI can answer course questions, nurture leads, and automate follow-up.',
+    outcomes: ['Inquiry response automation', 'Enrollment reminders', 'Student support FAQs'],
     icon: GraduationCap,
   },
   {
-    title: 'Ecommerce Brand',
-    result: 'AI product recommendation system increased sales.',
-    icon: ShoppingCart,
+    title: 'Healthcare Clinics',
+    slug: 'healthcare-clinics',
+    category: 'SMEs',
+    summary: 'Reduce front-desk load with automated intake and reminders.',
+    help: 'AI can handle appointment queries, intake forms, and pre-visit instructions.',
+    outcomes: ['Appointment scheduling', 'Pre-visit instructions', 'Follow-up reminders'],
+    icon: Stethoscope,
+  },
+  {
+    title: 'Driving Schools',
+    slug: 'driving-schools',
+    category: 'SMEs',
+    summary: 'Fill lesson slots faster and reduce no-shows.',
+    help: 'AI can manage schedules, confirm lessons, and send payment reminders.',
+    outcomes: ['Lesson scheduling', 'Slot availability updates', 'Payment follow-up nudges'],
+    icon: Car,
+  },
+  {
+    title: 'Playschools',
+    slug: 'playschools',
+    category: 'SMEs',
+    summary: 'Handle parent inquiries and admissions smoothly.',
+    help: 'AI can guide parents through admissions and document collection.',
+    outcomes: ['Admissions inquiry responses', 'Document checklist automation', 'Tour scheduling'],
+    icon: School,
   },
 ]
+
+export function getIndustryBySlug(slug: string) {
+  return industries.find((industry) => industry.slug === slug)
+}

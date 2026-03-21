@@ -23,7 +23,7 @@ export default function AIWorkflowVisualizer() {
       >
         <div className="mb-10 max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">AI Workflow Visualizer</p>
-          <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">How DharmaAI turns conversations into qualified pipeline</h2>
+          <h2 className="mt-3 text-3xl font-bold text-white md:text-4xl">How ArthaAI turns conversations into qualified pipeline</h2>
           <p className="mt-4 text-slate-300">
             We connect customer touchpoints, automation layers, and reporting so the business runs faster without adding manual overhead.
           </p>

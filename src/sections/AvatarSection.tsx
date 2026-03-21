@@ -56,7 +56,7 @@ export default function AvatarSection() {
               Ashutosh welcomes visitors with an AI intro.
             </h2>
             <p className="max-w-lg text-base leading-7 text-slate-300">
-              A short, human-first welcome that introduces DharmaAI and points people to the next step.
+              A short, human-first welcome that introduces ArthaAI and points people to the next step.
             </p>
           </div>
           <div className="grid max-w-[520px] gap-4 sm:grid-cols-2">
@@ -135,7 +135,7 @@ export default function AvatarSection() {
                   <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                     <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200">Welcome script</p>
                     <p className="mt-3 text-[15px] leading-7 text-slate-100">
-                      Hi, I&apos;m Ashutosh. Welcome to DharmaAI. Let&apos;s find the simplest next AI step for your
+                      Hi, I&apos;m Ashutosh. Welcome to ArthaAI. Let&apos;s find the simplest next AI step for your
                       business.
                     </p>
                   </div>
