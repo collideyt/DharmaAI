@@ -15,7 +15,7 @@ export default function AIAssessmentPage() {
           </div>
 
           <div className="mt-12 flex flex-col gap-8">
-            <div className="premium-card rounded-[30px] p-8 md:p-10">
+            <div className="premium-card rounded-[30px] p-6 sm:p-8 md:p-10">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
@@ -37,7 +37,7 @@ export default function AIAssessmentPage() {
               </div>
             </div>
 
-            <div className="glass-card rounded-[28px] p-6 md:p-8">
+            <div className="glass-card rounded-[28px] p-5 sm:p-6 md:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
                 AI Maturity Score Template
               </p>
@@ -67,7 +67,7 @@ export default function AIAssessmentPage() {
               </div>
             </div>
 
-            <div className="glass-card rounded-[28px] p-6 md:p-8">
+            <div className="glass-card rounded-[28px] p-5 sm:p-6 md:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-300">
                 Consultation Booking
               </p>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { MessageCircle, Sparkles, Send, X } from 'lucide-react'
+import { Sparkles, Send, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 type ChatRole = 'user' | 'bot'
@@ -54,14 +54,14 @@ export default function Chatbot() {
   }, [open])
 
   return (
-    <div className="fixed bottom-24 right-5 z-50 flex flex-col items-end">
+    <div className="fixed bottom-20 right-4 z-50 flex flex-col items-end sm:bottom-24 sm:right-5">
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10 }}
-            className="glass-card mb-3 w-80 rounded-2xl p-4 shadow-2xl"
+            className="glass-card mb-3 w-[92vw] max-w-sm rounded-2xl p-4 shadow-2xl"
           >
             <div className="mb-3 flex items-center justify-between">
               <p className="text-sm font-semibold text-white">ArthaAI Assistant</p>
@@ -108,11 +108,10 @@ export default function Chatbot() {
 
       <button
         onClick={() => setOpen((v) => !v)}
-        className="premium-button inline-flex w-[190px] justify-center gap-2 text-center whitespace-nowrap"
+        className="premium-button inline-flex h-14 w-14 items-center justify-center p-0"
+        aria-label={open ? 'Close chat' : 'Open chat'}
       >
-        <Sparkles size={16} />
-        {open ? 'Close Chat' : 'Ask ArthaAI'}
-        <MessageCircle size={16} />
+        {open ? <X size={20} /> : <Sparkles size={20} />}
       </button>
     </div>
   )

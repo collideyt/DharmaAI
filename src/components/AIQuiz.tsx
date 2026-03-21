@@ -100,7 +100,7 @@ export default function AIQuiz() {
   }
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+    <div className="grid gap-6 md:gap-8 lg:grid-cols-[1.2fr_0.8fr]">
       <div>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">Questionnaire · 20 questions</p>
@@ -123,11 +123,11 @@ export default function AIQuiz() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, delay: index * 0.04 }}
-              className="rounded-[22px] border border-white/10 bg-white/5 p-5 shadow-[0_18px_36px_rgba(2,6,23,0.2)]"
+              className="rounded-[22px] border border-white/10 bg-white/5 p-4 shadow-[0_18px_36px_rgba(2,6,23,0.2)] sm:p-5"
             >
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-base font-medium text-white">{question.label}</p>
+                  <p className="text-sm font-medium text-white sm:text-base">{question.label}</p>
                   <p className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">{question.category}</p>
                 </div>
                 <div className="inline-flex rounded-full border border-white/10 bg-slate-950/50 p-1">
@@ -139,7 +139,7 @@ export default function AIQuiz() {
                       key={option.label}
                       type="button"
                       onClick={() => setAnswers((current) => ({ ...current, [question.id]: option.value }))}
-                      className={`rounded-full px-4 py-2 text-sm transition ${
+                      className={`rounded-full px-3 py-2 text-xs transition sm:px-4 sm:text-sm ${
                         answers[question.id] === option.value
                           ? 'bg-gradient-to-r from-purple-500 via-cyan-400 to-emerald-400 text-slate-950 shadow-[0_8px_18px_rgba(124,58,237,0.25)]'
                           : 'text-slate-300 hover:text-white'
@@ -168,7 +168,11 @@ export default function AIQuiz() {
               Generate My Report
             </button>
           ) : (
-            <button type="button" onClick={() => setStep((current) => current + 1)} className="premium-button inline-flex">
+            <button
+              type="button"
+              onClick={() => setStep((current) => current + 1)}
+              className="premium-button inline-flex"
+            >
               Next Section
             </button>
           )}
