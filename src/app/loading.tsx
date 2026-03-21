@@ -3,7 +3,7 @@ export default function Loading() {
     <div className="flex min-h-screen items-center justify-center bg-[#0B0F1A] px-6">
       <div className="text-center">
         <p className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-          Dharma<span className="text-gradient">AI</span>
+          Artha<span className="text-gradient">AI</span>
         </p>
         <p className="mt-3 text-sm uppercase tracking-[0.32em] text-slate-300">
           Awakening Intelligence<span className="inline-flex pl-1">

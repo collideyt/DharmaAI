@@ -27,7 +27,7 @@ export default function MascotSection() {
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">Mascot</p>
           <h2 className="text-3xl font-bold text-white md:text-4xl">Meet the AI Monk</h2>
           <p className="mt-3 text-slate-300">
-            The AI Monk symbolizes intelligence, calm thinking, and growth. It represents DharmaAI&apos;s approach:
+            The AI Monk symbolizes intelligence, calm thinking, and growth. It represents ArthaAI&apos;s approach:
             disciplined strategy and practical execution for small businesses.
           </p>
         </div>

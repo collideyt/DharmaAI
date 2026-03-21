@@ -10,8 +10,8 @@ import './globals.css'
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DharmaAI',
-  description: 'DharmaAI helps small businesses adopt AI in the AI-first economy.',
+  title: 'ArthaAI',
+  description: 'ArthaAI helps small businesses adopt AI in the AI-first economy.',
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className={jakarta.className} suppressHydrationWarning>
         <div className="min-h-screen text-slate-100 flex flex-col">
           <Navbar />
-          <main className="pt-[72px] flex-1">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
           <Chatbot />
           <WhatsAppButton />

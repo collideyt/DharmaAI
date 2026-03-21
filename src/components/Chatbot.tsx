@@ -15,7 +15,7 @@ const defaultMessages: ChatMessage[] = [
   { role: 'user', text: 'How can AI help my business?' },
   {
     role: 'bot',
-    text: 'DharmaAI helps automate operations, generate leads, and improve customer experiences using AI.',
+    text: 'ArthaAI helps automate operations, generate leads, and improve customer experiences using AI.',
   },
 ]
 
@@ -35,7 +35,7 @@ export default function Chatbot() {
         ...prev,
         {
           role: 'bot',
-          text: 'DharmaAI helps automate operations, generate leads, and improve customer experiences using AI.',
+          text: 'ArthaAI helps automate operations, generate leads, and improve customer experiences using AI.',
         },
       ])
     }, 500)
@@ -64,7 +64,7 @@ export default function Chatbot() {
             className="glass-card mb-3 w-80 rounded-2xl p-4 shadow-2xl"
           >
             <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-semibold text-white">DharmaAI Assistant</p>
+              <p className="text-sm font-semibold text-white">ArthaAI Assistant</p>
               <button onClick={() => setOpen(false)} className="text-slate-300 hover:text-white" aria-label="Close chat">
                 <X size={16} />
               </button>
@@ -111,7 +111,7 @@ export default function Chatbot() {
         className="premium-button inline-flex w-[190px] justify-center gap-2 text-center whitespace-nowrap"
       >
         <Sparkles size={16} />
-        {open ? 'Close Chat' : 'Ask DharmaAI'}
+        {open ? 'Close Chat' : 'Ask ArthaAI'}
         <MessageCircle size={16} />
       </button>
     </div>
